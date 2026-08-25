@@ -9,14 +9,28 @@
 </head>
 <body>
 <div id="lobbyView" class="screen lobby-screen">
+    <div class="lobby-scan-sweep" aria-hidden="true"></div>
     <div class="lobby-shell">
-        <div class="eyebrow"><span class="status-dot"></span> NETWORK / SOCIAL_GRID_01</div>
-        <div class="brand-lockup">
-            <div class="brand-mark" aria-hidden="true">S</div>
-            <div><p class="brand-kicker">FIELD PROTOCOL</p><h1>SOC <span>OPS</span></h1></div>
+        <div class="eyebrow lobby-anim-1"><span class="status-dot"></span> NETWORK / SOCIAL_GRID_01 <span class="eyebrow-sep">//</span> <span class="eyebrow-ticker" aria-hidden="true">SCANNING NODES</span></div>
+        <div class="brand-lockup lobby-anim-2">
+            <div class="brand-mark" aria-hidden="true">
+                <span class="brand-mark-inner">S</span>
+                <span class="brand-mark-ring" aria-hidden="true"></span>
+            </div>
+            <div>
+                <p class="brand-kicker">FIELD PROTOCOL</p>
+                <h1 class="glitch-title" data-text="SOC OPS">SOC <span>OPS</span></h1>
+            </div>
         </div>
-        <p class="lobby-tagline">Find your people.<br/><strong>Complete the connection.</strong></p>
-        <div class="briefing-panel">
+        <p class="lobby-tagline lobby-anim-3">Find your people.<br/><strong>Complete the connection.</strong></p>
+        <div class="lobby-stats lobby-anim-4" aria-label="Game stats">
+            <div class="stat-chip"><span class="stat-value">25</span><span class="stat-label">NODES</span></div>
+            <div class="stat-divider" aria-hidden="true">//</div>
+            <div class="stat-chip"><span class="stat-value">5×5</span><span class="stat-label">GRID</span></div>
+            <div class="stat-divider" aria-hidden="true">//</div>
+            <div class="stat-chip"><span class="stat-value">∞</span><span class="stat-label">COMBOS</span></div>
+        </div>
+        <div class="briefing-panel lobby-anim-5">
             <div class="panel-heading"><span>MISSION_BRIEF</span><span class="panel-code">v.05</span></div>
             <ul class="briefing-list">
                 <li><span class="step-number">01</span><span>Find someone who matches a tile.</span></li>
@@ -24,11 +38,19 @@
                 <li><span class="step-number">03</span><span>Connect five in a row to win.</span></li>
             </ul>
         </div>
-        <button onclick="launchGame()" class="launch-button accent-active"><span>INITIALIZE BOARD</span><span class="button-arrow" aria-hidden="true">↗</span></button>
-        <p class="lobby-footnote">NO ACCOUNT REQUIRED <span>//</span> JUST CURIOSITY</p>
+        <button onclick="launchGame()" class="launch-button accent-active lobby-anim-6">
+            <span class="launch-button-inner">
+                <span class="launch-icon" aria-hidden="true">▶</span>
+                <span>INITIALIZE BOARD</span>
+            </span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+        </button>
+        <p class="lobby-footnote lobby-anim-7">NO ACCOUNT REQUIRED <span>//</span> JUST CURIOSITY</p>
     </div>
     <div class="lobby-decor decor-top" aria-hidden="true">[ SYS.READY ]</div>
     <div class="lobby-decor decor-bottom" aria-hidden="true">25 NODES / 01 CONNECTION GRID</div>
+    <div class="lobby-corner-tl" aria-hidden="true"></div>
+    <div class="lobby-corner-br" aria-hidden="true"></div>
 </div>
 
 <div id="activeView" class="screen game-screen" style="display:none">
