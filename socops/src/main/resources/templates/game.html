@@ -8,55 +8,55 @@
 <link rel="icon" type="image/png" th:href="@{/favicon.png}"/>
 </head>
 <body>
-<div id="lobbyView" class="screen lobby-screen">
+<div id="lobbyView" class="screen lobby-screen" role="region" aria-label="Lobby">
     <div class="lobby-shell">
-        <div class="eyebrow"><span class="status-dot"></span> NETWORK / SOCIAL_GRID_01</div>
+        <div class="eyebrow" aria-label="Network status"><span class="status-dot" aria-hidden="true"></span> NETWORK / SOCIAL_GRID_01</div>
         <div class="brand-lockup">
             <div class="brand-mark" aria-hidden="true">S</div>
             <div><p class="brand-kicker">FIELD PROTOCOL</p><h1>SOC <span>OPS</span></h1></div>
         </div>
         <p class="lobby-tagline">Find your people.<br/><strong>Complete the connection.</strong></p>
-        <div class="briefing-panel">
+        <div class="briefing-panel" role="region" aria-label="Mission briefing">
             <div class="panel-heading"><span>MISSION_BRIEF</span><span class="panel-code">v.05</span></div>
             <ul class="briefing-list">
-                <li><span class="step-number">01</span><span>Find someone who matches a tile.</span></li>
-                <li><span class="step-number">02</span><span>Tap it to lock the connection.</span></li>
-                <li><span class="step-number">03</span><span>Connect five in a row to win.</span></li>
+                <li><span class="step-number" aria-hidden="true">01</span><span>Find someone who matches a tile.</span></li>
+                <li><span class="step-number" aria-hidden="true">02</span><span>Tap it to lock the connection.</span></li>
+                <li><span class="step-number" aria-hidden="true">03</span><span>Connect five in a row to win.</span></li>
             </ul>
         </div>
-        <button onclick="launchGame()" class="launch-button accent-active"><span>INITIALIZE BOARD</span><span class="button-arrow" aria-hidden="true">↗</span></button>
-        <p class="lobby-footnote">NO ACCOUNT REQUIRED <span>//</span> JUST CURIOSITY</p>
+        <button onclick="launchGame()" class="launch-button accent-active" aria-label="Initialize game board"><span>INITIALIZE BOARD</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+        <p class="lobby-footnote">NO ACCOUNT REQUIRED <span aria-hidden="true">//</span> JUST CURIOSITY</p>
     </div>
     <div class="lobby-decor decor-top" aria-hidden="true">[ SYS.READY ]</div>
     <div class="lobby-decor decor-bottom" aria-hidden="true">25 NODES / 01 CONNECTION GRID</div>
 </div>
 
-<div id="activeView" class="screen game-screen" style="display:none">
-    <header class="game-header">
-        <button onclick="retreatToLobby()" class="back-button tile-active"><span aria-hidden="true">←</span> EXIT</button>
-        <div class="header-brand"><span class="header-signal"></span><strong>SOC OPS</strong><span>// LIVE</span></div>
-        <div class="header-code">GRID_01</div>
+<div id="activeView" class="screen game-screen" style="display:none" role="main">
+    <header class="game-header" role="region" aria-label="Game header">
+        <button onclick="retreatToLobby()" class="back-button tile-active" aria-label="Exit to lobby"><span aria-hidden="true">←</span> EXIT</button>
+        <div class="header-brand" aria-hidden="true"><span class="header-signal"></span><strong>SOC OPS</strong><span>// LIVE</span></div>
+        <div class="header-code" aria-hidden="true">GRID_01</div>
     </header>
-    <p class="game-hint"><span class="hint-prefix">OBJECTIVE //</span> Tap a square when you find someone who matches it.</p>
-    <div id="bingoBanner" class="bingo-banner" style="display:none"><span class="banner-icon">✦</span> CONNECTION COMPLETE <span class="banner-icon">✦</span></div>
+    <p class="game-hint" role="status"><span class="hint-prefix">OBJECTIVE //</span> Tap a square when you find someone who matches it.</p>
+    <div id="bingoBanner" class="bingo-banner" style="display:none" role="alert" aria-live="assertive"><span class="banner-icon" aria-hidden="true">✦</span> CONNECTION COMPLETE <span class="banner-icon" aria-hidden="true">✦</span></div>
     <main class="board-stage">
-        <div class="board-frame">
-            <div class="board-label board-label-left">PEOPLE / PLACES / STORIES</div>
-            <div id="gridContainer" class="grid grid-cols-5 gap-1 board-grid"></div>
-            <div class="board-label board-label-right">TAP TO CONNECT</div>
+        <div class="board-frame" role="region" aria-label="Bingo board">
+            <div class="board-label board-label-left" aria-hidden="true">PEOPLE / PLACES / STORIES</div>
+            <div id="gridContainer" class="grid grid-cols-5 gap-1 board-grid" role="grid" aria-label="5 by 5 bingo grid"></div>
+            <div class="board-label board-label-right" aria-hidden="true">TAP TO CONNECT</div>
         </div>
     </main>
-    <footer class="game-footer"><span><i></i> CHANNEL OPEN</span><span>5 x 5 // SOCIAL BINGO</span><span>LOCAL SESSION</span></footer>
+    <footer class="game-footer" role="contentinfo"><span><i aria-hidden="true"></i> CHANNEL OPEN</span><span>5 x 5 // SOCIAL BINGO</span><span>LOCAL SESSION</span></footer>
 </div>
 
-<div id="victoryOverlay" class="victory-overlay" style="display:none">
+<div id="victoryOverlay" class="victory-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="victoryHeading">
     <div class="victory-modal animate-[bounce_0.5s_ease-out]">
         <div class="victory-scanline" aria-hidden="true"></div>
         <div class="victory-icon" aria-hidden="true">✦</div>
         <p class="victory-kicker">SIGNAL LOCKED // 100%</p>
-        <h2>YOU GOT<br/><span>BINGO</span></h2>
+        <h2 id="victoryHeading">YOU GOT<br/><span>BINGO</span></h2>
         <p class="victory-copy">Five connections. One perfect line.</p>
-        <button onclick="dismissVictoryModal()" class="continue-button accent-active"><span>KEEP SCANNING</span><span aria-hidden="true">→</span></button>
+        <button onclick="dismissVictoryModal()" class="continue-button accent-active" aria-label="Dismiss victory and continue playing"><span>KEEP SCANNING</span><span aria-hidden="true">→</span></button>
     </div>
 </div>
 
@@ -97,6 +97,7 @@
             if (tile.freeCell) { btn.disabled = true; }
             btn.setAttribute("aria-pressed", String(tile.selected));
             btn.setAttribute("aria-label", tile.freeCell ? "Free space" : tile.prompt);
+            btn.setAttribute("role", "gridcell");
             var labelSpan = document.createElement("span");
             labelSpan.className = "wrap-break-word hyphens-auto";
             labelSpan.textContent = tile.prompt;
@@ -104,6 +105,7 @@
             if (tile.selected && !tile.freeCell) {
                 var tick = document.createElement("span");
                 tick.className = "tile-check absolute top-0.5 right-0.5 text-xs";
+                tick.setAttribute("aria-hidden", "true");
                 tick.textContent = "↗";
                 btn.appendChild(tick);
             }
