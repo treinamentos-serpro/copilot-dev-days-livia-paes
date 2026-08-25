@@ -3,39 +3,39 @@ package com.socops.data;
 import java.util.List;
 
 /**
- * Central catalogue of every icebreaker prompt that can appear on a board.
- * Exactly 24 entries — one fewer than the 25-cell grid, because the
- * centre cell is always the free space.
+ * Catálogo central de todos os prompts do bingo.
+ * Há exatamente 24 entradas, uma a menos que a grade de 25 células,
+ * porque a célula central é sempre o espaço livre.
  */
 public final class IcebreakerPrompts {
 
-    public static final String FREE_CELL_LABEL = "FREE SPACE";
+    public static final String FREE_CELL_LABEL = "ESPAÇO LIVRE";
 
     public static final List<String> ALL_PROMPTS = List.of(
-            "bikes to work",
-            "has lived in another country",
-            "has a pet",
-            "prefers tea over coffee",
-            "plays an instrument",
-            "speaks more than 2 languages",
-            "has run a marathon",
-            "was born in a different state",
-            "has met a celebrity",
-            "can juggle",
-            "has been skydiving",
-            "loves cooking",
-            "has a garden",
-            "has traveled to Asia",
-            "is left-handed",
-            "has a twin",
-            "plays video games",
-            "does yoga",
-            "has a hidden talent",
-            "loves spicy food",
-            "has been on TV",
-            "collects something unique",
-            "has read a book this month",
-            "knows sign language"
+            "usa tecnologia todos os dias",
+            "já ajudou alguém com um problema técnico",
+            "tem um app que não vive sem",
+            "aprende melhor com vídeos e tutoriais",
+            "já montou ou configurou um computador",
+            "tem um gadget favorito da infância",
+            "já ensinou alguém a usar uma ferramenta digital",
+            "quer aprender uma nova tecnologia este ano",
+            "já teve que improvisar sem internet ou energia",
+            "automatiza tarefas repetitivas da rotina",
+            "já usou IA para facilitar trabalho ou estudo",
+            "conhece atalhos úteis de teclado",
+            "já experimentou um software e acabou usando por meses",
+            "prefere ferramentas simples e práticas",
+            "tem um projeto pessoal ligado à tecnologia",
+            "gosta de testar novas ferramentas digitais",
+            "já explicou tecnologia para alguém iniciante",
+            "tem uma stack favorita para trabalho ou estudo",
+            "já criou algo digital que ficou orgulhoso",
+            "quer dominar uma tecnologia em breve",
+            "usa mais produtividade ou mais criatividade no dia a dia",
+            "já teve que resolver um problema sem tutorial",
+            "gosta de acompanhar inovações de tech",
+            "já participou de comunidade, grupo ou evento tech"
     );
 
     private IcebreakerPrompts() {

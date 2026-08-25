@@ -3,21 +3,21 @@ package com.socops.model;
 import com.socops.data.IcebreakerPrompts;
 
 /**
- * One tile on the 5×5 bingo grid.
+ * Uma célula do tabuleiro de bingo 5×5.
  *
- * @param id        zero-based position (0-24)
- * @param prompt    display text shown on the tile
- * @param selected  whether the player has tapped this tile
- * @param freeCell  true only for the centre "FREE SPACE" tile
+ * @param id        posição zero-based (0-24)
+ * @param prompt    texto exibido na célula
+ * @param selected  indica se o jogador marcou a célula
+ * @param freeCell  true apenas para a célula central de espaço livre
  */
 public record BingoCell(int id, String prompt, boolean selected, boolean freeCell) {
 
-    /** Build a regular, untapped prompt tile. */
+    /** Cria uma célula comum ainda não marcada. */
     public static BingoCell ofPrompt(int id, String prompt) {
         return new BingoCell(id, prompt, false, false);
     }
 
-    /** Build the centre free-space tile (always pre-tapped). */
+    /** Cria a célula central de espaço livre, já marcada desde o início. */
     public static BingoCell ofFreeCell(int id) {
         return new BingoCell(id, IcebreakerPrompts.FREE_CELL_LABEL, true, true);
     }

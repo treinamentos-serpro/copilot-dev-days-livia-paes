@@ -1,5 +1,6 @@
 package com.socops.service;
 
+import com.socops.data.IcebreakerPrompts;
 import com.socops.model.BingoCell;
 import com.socops.model.WinningStreak;
 
@@ -13,110 +14,126 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Validates board assembly, cell flipping, and victory detection
- * provided by {@link BoardAssembler}.
+ * Valida a montagem do tabuleiro, a marcação das células e a detecção
+ * de vitória fornecidas por {@link BoardAssembler}.
  */
 class BoardAssemblerTests {
 
-    /* ── board creation ───────────────────────────────────────── */
+    @Test
+    @DisplayName("Os prompts do Tech Life Bingo estão em português")
+    void techLifePromptsAreInPortuguese() {
+        assertEquals(24, IcebreakerPrompts.ALL_PROMPTS.size(),
+                "O tabuleiro precisa ter 24 prompts mais o espaço livre");
+        assertTrue(IcebreakerPrompts.ALL_PROMPTS.stream()
+                        .anyMatch(prompt -> prompt.toLowerCase().contains("tecnologia")),
+                "Os prompts devem refletir o tema Tech Life Bingo");
+        assertTrue(IcebreakerPrompts.ALL_PROMPTS.stream()
+                        .noneMatch(prompt -> prompt.toLowerCase().contains("has ")
+                                || prompt.toLowerCase().contains("loves ")
+                                || prompt.toLowerCase().contains("plays ")
+                                || prompt.toLowerCase().contains("prefers ")),
+                "Os prompts devem estar em português e não em inglês");
+    }
+
+    /* ── criação do tabuleiro ─────────────────────────────────────── */
 
     @Test
-    @DisplayName("Assembled board contains exactly twenty-five cells")
+    @DisplayName("O tabuleiro montado contém exatamente vinte e cinco células")
     void assembledBoardHasTwentyFiveCells() {
         List<BingoCell> generatedBoard = BoardAssembler.assembleNewBoard();
         assertEquals(25, generatedBoard.size(),
-                "A standard bingo grid must hold 25 tiles");
+                "Um tabuleiro de bingo padrão deve ter 25 células");
     }
 
     @Test
-    @DisplayName("Centre slot (index 12) is always the free cell and pre-selected")
+    @DisplayName("A célula central (índice 12) é sempre o espaço livre e já vem marcada")
     void centerSlotIsAlwaysFreeCell() {
         List<BingoCell> generatedBoard = BoardAssembler.assembleNewBoard();
         BingoCell centreTile = generatedBoard.get(12);
 
-        assertTrue(centreTile.freeCell(),  "Centre tile must be flagged as free");
-        assertTrue(centreTile.selected(),  "Free cell must start already tapped");
+        assertTrue(centreTile.freeCell(),  "A célula central deve ser marcada como livre");
+        assertTrue(centreTile.selected(),  "A célula livre deve começar já marcada");
     }
 
     @Test
-    @DisplayName("Every non-free cell starts out unselected")
+    @DisplayName("Todas as células que não são livres começam sem seleção")
     void nonFreeCellsStartUnselected() {
         List<BingoCell> generatedBoard = BoardAssembler.assembleNewBoard();
         for (BingoCell tile : generatedBoard) {
             if (!tile.freeCell()) {
                 assertFalse(tile.selected(),
-                        "Tile id=" + tile.id() + " should begin unselected");
+                        "A célula id=" + tile.id() + " deve começar desmarcada");
             }
         }
     }
 
-    /* ── cell toggling ────────────────────────────────────────── */
+    /* ── alternância de seleção ───────────────────────────────────── */
 
     @Test
-    @DisplayName("Flipping a regular cell toggles its selection on then off")
+    @DisplayName("Ao marcar uma célula comum, a seleção alterna entre ligada e desligada")
     void flippingCellTogglesSelection() {
         List<BingoCell> board = BoardAssembler.assembleNewBoard();
         int targetId = 0;
 
         List<BingoCell> afterFirstFlip = BoardAssembler.flipCell(board, targetId);
         assertTrue(afterFirstFlip.get(targetId).selected(),
-                "First flip should mark the cell as selected");
+                "A primeira marcação deve ativar a célula");
 
         List<BingoCell> afterSecondFlip = BoardAssembler.flipCell(afterFirstFlip, targetId);
         assertFalse(afterSecondFlip.get(targetId).selected(),
-                "Second flip should revert the cell to unselected");
+                "A segunda marcação deve desmarcar a célula");
     }
 
     @Test
-    @DisplayName("Flipping the free cell has absolutely no effect")
+    @DisplayName("Tentar marcar a célula livre não tem efeito")
     void flippingFreeCellHasNoEffect() {
         List<BingoCell> board = BoardAssembler.assembleNewBoard();
         int freeCellId = 12;
 
         List<BingoCell> afterAttemptedFlip = BoardAssembler.flipCell(board, freeCellId);
         assertTrue(afterAttemptedFlip.get(freeCellId).selected(),
-                "Free cell must remain selected even after a flip attempt");
+                "A célula livre deve permanecer marcada mesmo ao tentar alternar");
         assertTrue(afterAttemptedFlip.get(freeCellId).freeCell(),
-                "Free cell flag must not change");
+                "A flag da célula livre não deve mudar");
     }
 
-    /* ── victory detection ────────────────────────────────────── */
+    /* ── detecção de vitória ──────────────────────────────────────── */
 
     @Test
-    @DisplayName("Completing the entire first row is detected as a row victory")
+    @DisplayName("Completar a primeira linha inteira é detectado como vitória da linha")
     void completeRowDetectedAsVictory() {
         List<BingoCell> board = BoardAssembler.assembleNewBoard();
 
-        // Select every cell in row 0 (indices 0 through 4)
+        // Seleciona todas as células da linha 0 (índices 0 a 4)
         for (int col = 0; col < 5; col++) {
             board = BoardAssembler.flipCell(board, col);
         }
 
         Optional<WinningStreak> result = BoardAssembler.detectWinningStreak(board);
-        assertTrue(result.isPresent(), "A full row should trigger a victory");
+        assertTrue(result.isPresent(), "Uma linha completa deve disparar vitória");
         assertEquals("row", result.get().direction(),
-                "The detected streak direction should be 'row'");
+                "A direção detectada deve ser 'row'");
         assertEquals(0, result.get().index(),
-                "The winning row index should be 0");
+                "O índice da linha vencedora deve ser 0");
     }
 
     @Test
-    @DisplayName("A freshly assembled board has no winning streak")
+    @DisplayName("Um tabuleiro recém montado não possui sequência vencedora")
     void incompleteBoardHasNoVictory() {
         List<BingoCell> freshBoard = BoardAssembler.assembleNewBoard();
         Optional<WinningStreak> result = BoardAssembler.detectWinningStreak(freshBoard);
         assertTrue(result.isEmpty(),
-                "No streak should be found on a brand-new board");
+                "Não deve haver sequência vencedora em um tabuleiro novo");
     }
 
     @Test
-    @DisplayName("collectWinningCellIds returns the correct position set")
+    @DisplayName("collectWinningCellIds retorna o conjunto correto de posições")
     void winningCellIdsMatchStreak() {
         List<Integer> expectedPositions = List.of(0, 1, 2, 3, 4);
         WinningStreak fakeStreak = new WinningStreak("row", 0, expectedPositions);
 
         Set<Integer> collectedIds = BoardAssembler.collectWinningCellIds(fakeStreak);
         assertEquals(Set.of(0, 1, 2, 3, 4), collectedIds,
-                "Collected IDs must match the streak's cell positions");
+                "Os IDs coletados devem corresponder às posições da sequência vencedora");
     }
 }

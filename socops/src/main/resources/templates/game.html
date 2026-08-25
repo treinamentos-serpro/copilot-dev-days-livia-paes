@@ -1,62 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SOC OPS // Social Bingo</title>
+<title>SOC OPS // Tech Life Bingo</title>
 <link rel="stylesheet" th:href="@{/css/app.css}"/>
 <link rel="icon" type="image/png" th:href="@{/favicon.png}"/>
 </head>
 <body>
 <div id="lobbyView" class="screen lobby-screen">
     <div class="lobby-shell">
-        <div class="eyebrow"><span class="status-dot"></span> NETWORK / SOCIAL_GRID_01</div>
+        <div class="eyebrow"><span class="status-dot"></span> REDES / TECH_LIFE_BINGO</div>
         <div class="brand-lockup">
             <div class="brand-mark" aria-hidden="true">S</div>
-            <div><p class="brand-kicker">FIELD PROTOCOL</p><h1>SOC <span>OPS</span></h1></div>
+            <div><p class="brand-kicker">PROTOCOLO DE CAMPO</p><h1>SOC <span>OPS</span></h1></div>
         </div>
-        <p class="lobby-tagline">Find your people.<br/><strong>Complete the connection.</strong></p>
+        <p class="lobby-tagline">Encontre pessoas com a mesma vibe tech.<br/><strong>Complete a conexão.</strong></p>
         <div class="briefing-panel">
-            <div class="panel-heading"><span>MISSION_BRIEF</span><span class="panel-code">v.05</span></div>
+            <div class="panel-heading"><span>MISSÃO</span><span class="panel-code">v.05</span></div>
             <ul class="briefing-list">
-                <li><span class="step-number">01</span><span>Find someone who matches a tile.</span></li>
-                <li><span class="step-number">02</span><span>Tap it to lock the connection.</span></li>
-                <li><span class="step-number">03</span><span>Connect five in a row to win.</span></li>
+                <li><span class="step-number">01</span><span>Encontre alguém que combine com uma célula.</span></li>
+                <li><span class="step-number">02</span><span>Toque para marcar a conexão.</span></li>
+                <li><span class="step-number">03</span><span>Complete cinco em linha para vencer.</span></li>
             </ul>
         </div>
-        <button onclick="launchGame()" class="launch-button accent-active"><span>INITIALIZE BOARD</span><span class="button-arrow" aria-hidden="true">↗</span></button>
-        <p class="lobby-footnote">NO ACCOUNT REQUIRED <span>//</span> JUST CURIOSITY</p>
+        <button onclick="launchGame()" class="launch-button accent-active"><span>INICIAR TABULEIRO</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+        <p class="lobby-footnote">SEM CADASTRO <span>//</span> SÓ CURIOSIDADE</p>
     </div>
-    <div class="lobby-decor decor-top" aria-hidden="true">[ SYS.READY ]</div>
-    <div class="lobby-decor decor-bottom" aria-hidden="true">25 NODES / 01 CONNECTION GRID</div>
+    <div class="lobby-decor decor-top" aria-hidden="true">[ SYS.PRONTO ]</div>
+    <div class="lobby-decor decor-bottom" aria-hidden="true">25 NÓS / 01 GRELHA TECH</div>
 </div>
 
 <div id="activeView" class="screen game-screen" style="display:none">
     <header class="game-header">
-        <button onclick="retreatToLobby()" class="back-button tile-active"><span aria-hidden="true">←</span> EXIT</button>
-        <div class="header-brand"><span class="header-signal"></span><strong>SOC OPS</strong><span>// LIVE</span></div>
+        <button onclick="retreatToLobby()" class="back-button tile-active"><span aria-hidden="true">←</span> SAIR</button>
+        <div class="header-brand"><span class="header-signal"></span><strong>SOC OPS</strong><span>// AO VIVO</span></div>
         <div class="header-code">GRID_01</div>
     </header>
-    <p class="game-hint"><span class="hint-prefix">OBJECTIVE //</span> Tap a square when you find someone who matches it.</p>
-    <div id="bingoBanner" class="bingo-banner" style="display:none"><span class="banner-icon">✦</span> CONNECTION COMPLETE <span class="banner-icon">✦</span></div>
+    <p class="game-hint"><span class="hint-prefix">OBJETIVO //</span> Toque em uma casa quando encontrar alguém que combine com ela.</p>
+    <div id="bingoBanner" class="bingo-banner" style="display:none"><span class="banner-icon">✦</span> CONEXÃO COMPLETA <span class="banner-icon">✦</span></div>
     <main class="board-stage">
         <div class="board-frame">
-            <div class="board-label board-label-left">PEOPLE / PLACES / STORIES</div>
+            <div class="board-label board-label-left">PESSOAS / ROTINA / TECNOLOGIA</div>
             <div id="gridContainer" class="grid grid-cols-5 gap-1 board-grid"></div>
-            <div class="board-label board-label-right">TAP TO CONNECT</div>
+            <div class="board-label board-label-right">TOQUE PARA CONECTAR</div>
         </div>
     </main>
-    <footer class="game-footer"><span><i></i> CHANNEL OPEN</span><span>5 x 5 // SOCIAL BINGO</span><span>LOCAL SESSION</span></footer>
+    <footer class="game-footer"><span><i></i> CANAL ABERTO</span><span>5 x 5 // TECH LIFE BINGO</span><span>SESSÃO LOCAL</span></footer>
 </div>
 
 <div id="victoryOverlay" class="victory-overlay" style="display:none">
     <div class="victory-modal animate-[bounce_0.5s_ease-out]">
         <div class="victory-scanline" aria-hidden="true"></div>
         <div class="victory-icon" aria-hidden="true">✦</div>
-        <p class="victory-kicker">SIGNAL LOCKED // 100%</p>
-        <h2>YOU GOT<br/><span>BINGO</span></h2>
-        <p class="victory-copy">Five connections. One perfect line.</p>
-        <button onclick="dismissVictoryModal()" class="continue-button accent-active"><span>KEEP SCANNING</span><span aria-hidden="true">→</span></button>
+        <p class="victory-kicker">SINAL BLOQUEADO // 100%</p>
+        <h2>VOCÊ FEZ<br/><span>BINGO</span></h2>
+        <p class="victory-copy">Cinco conexões. Uma linha perfeita.</p>
+        <button onclick="dismissVictoryModal()" class="continue-button accent-active"><span>CONTINUAR ESCREVENDO</span><span aria-hidden="true">→</span></button>
     </div>
 </div>
 
@@ -96,7 +96,7 @@
             btn.className = base + " " + state + extra;
             if (tile.freeCell) { btn.disabled = true; }
             btn.setAttribute("aria-pressed", String(tile.selected));
-            btn.setAttribute("aria-label", tile.freeCell ? "Free space" : tile.prompt);
+            btn.setAttribute("aria-label", tile.freeCell ? "Espaço livre" : tile.prompt);
             var labelSpan = document.createElement("span");
             labelSpan.className = "wrap-break-word hyphens-auto";
             labelSpan.textContent = tile.prompt;
