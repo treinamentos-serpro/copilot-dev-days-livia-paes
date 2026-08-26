@@ -2,50 +2,59 @@
 
 # Soc Ops
 
-Social Bingo game for in-person mixers. Find people who match the questions and get 5 in a row!
+Turn any in-person meetup into a fast, fun social bingo challenge.
+Players find people who match the prompts and race to complete 5 in a row.
 
-📚 **[View Lab Guide](workshop/GUIDE.md)**
-
----
-
-## 📚 Lab Guide
-
-| Part | Title |
-|------|-------|
-| [**00**](workshop/00-overview.md) | Overview & Checklist |
-| [**01**](workshop/01-setup.md) | Setup & Context Engineering |
-| [**02**](workshop/02-design.md) | Design-First Frontend |
-| [**03**](workshop/03-quiz-master.md) | Custom Quiz Master |
-| [**04**](workshop/04-multi-agent.md) | Multi-Agent Development |
-
-> 📝 Lab guides are also available in the [`workshop/`](workshop/) folder for offline reading.
+[🎮 Live Demo](https://copilot-dev-days.github.io/agent-lab-java/) • [📚 Workshop Guide](workshop/GUIDE.md)
 
 ---
 
-## Prerequisites
+## Why this project
+
+- **Icebreaker-first**: 24 curated prompts for quick conversations.
+- **Ready for workshops**: built to teach design-first and multi-agent Copilot workflows.
+- **Simple stack**: Spring Boot + Thymeleaf + vanilla JavaScript + custom CSS utilities.
+
+---
+
+## Start in 60 seconds
+
+### Prerequisites
 
 - [Java 21 JDK](https://adoptium.net/) or higher
-- [Apache Maven 3.9+](https://maven.apache.org/) (or use the included Maven Wrapper)
+- Maven Wrapper included (`./mvnw`)
 
-## Run
+### Run locally
 
 ```bash
 cd socops
 ./mvnw spring-boot:run
 ```
 
-## Build
+Open `http://localhost:8080`.
+
+---
+
+## Workshop path
+
+| Part | What you'll do |
+|------|-----------------|
+| [**00**](workshop/00-overview.md) | Understand the challenge and checklist |
+| [**01**](workshop/01-setup.md) | Set up context engineering |
+| [**02**](workshop/02-design.md) | Redesign the frontend with a design-first approach |
+| [**03**](workshop/03-quiz-master.md) | Create a custom quiz theme with an agent |
+| [**04**](workshop/04-multi-agent.md) | Build features with multi-agent workflows |
+
+> 📝 Full offline guides are available in [`workshop/`](workshop/).
+
+---
+
+## Build and test
 
 ```bash
 cd socops
 ./mvnw clean package
-```
-
-## Test
-
-```bash
-cd socops
 ./mvnw test
 ```
 
-Deploys automatically to GitHub Pages on push to `main`.
+GitHub Pages deploys automatically on pushes to `main`.
